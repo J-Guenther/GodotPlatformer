@@ -8,6 +8,9 @@ const JUMP_SPEED = -1500
 var motion = Vector2()
 export var world_limit = 3000
 
+func _ready():
+	Global.Player = self
+
 func _physics_process(delta):
 	update_motion(delta)
 
@@ -24,13 +27,13 @@ func update_animation(motion):
 	$AnimatedSprite.update(motion)
 
 func fall(delta):
-	if is_on_floor() or is_on_ceiling(): # todo fragen warum bei is_on_ceiling nicht stecken bleibt
+	if motion.y > 0 and (is_on_floor() or is_on_ceiling()): # todo fragen warum bei is_on_ceiling nicht stecken bleibt
 		motion.y = 0
 	else:
 		motion.y += GRAVITY * delta
 		
 	if position.y > world_limit:
-		end_game()
+		Global.GameState.end_game()
 	
 func run():
 	if Input.is_action_pressed("ui_right") and not Input.is_action_pressed("ui_left"):
@@ -43,6 +46,6 @@ func run():
 func jump():
 	if Input.is_action_pressed("ui_up") and is_on_floor():
 		motion.y = JUMP_SPEED
-		
-func end_game():
-	get_tree().change_scene("res://Scenes/GameOver.tscn")
+
+func hurt():
+		motion.y = JUMP_SPEED
