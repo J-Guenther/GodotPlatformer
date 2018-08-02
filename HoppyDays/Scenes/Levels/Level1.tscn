@@ -67,11 +67,12 @@ position = Vector2( 1840, 300 )
 [node name="Coin" parent="." index="3" instance=ExtResource( 7 )]
 
 position = Vector2( 800, 240 )
-frame = 1
+frame = 3
 
 [node name="Coin2" parent="." index="4" instance=ExtResource( 7 )]
 
 position = Vector2( 1320, 310 )
+frame = 2
 
 [node name="AudioStreams" type="Node2D" parent="." index="5"]
 
