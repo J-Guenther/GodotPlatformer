@@ -28,13 +28,15 @@ func update_animation(motion):
 	$AnimatedSprite.update(motion)
 
 func fall(delta):
-	if motion.y > 0 and (is_on_floor() or is_on_ceiling()): # todo fragen warum bei is_on_ceiling nicht stecken bleibt
+	if is_on_floor() or is_on_ceiling(): # todo fragen warum bei is_on_ceiling nicht stecken bleibt
 		motion.y = 0
 	else:
 		motion.y += GRAVITY * delta
 		
 	if position.y > world_limit:
 		Global.GameState.end_game()
+		
+	motion.y = clamp(motion.y , (JUMP_SPEED * JUMP_BOOST), -JUMP_SPEED) # Episode 44 Udemy
 	
 func run():
 	if Input.is_action_pressed("ui_right") and not Input.is_action_pressed("ui_left"):

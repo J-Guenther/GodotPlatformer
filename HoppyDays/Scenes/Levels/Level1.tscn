@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://Scripts/GameState.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/Player.tscn" type="PackedScene" id=2]
@@ -15,6 +15,7 @@
 [ext_resource path="res://Scenes/JumpPad.tscn" type="PackedScene" id=13]
 [ext_resource path="res://Scenes/Spikeman.tscn" type="PackedScene" id=14]
 [ext_resource path="res://Scenes/Cloud.tscn" type="PackedScene" id=15]
+[ext_resource path="res://Scenes/Portal.tscn" type="PackedScene" id=16]
 
 [node name="Level1" type="Node2D" index="0"]
 
@@ -66,11 +67,11 @@ position = Vector2( 1840, 300 )
 [node name="Coin" parent="." index="3" instance=ExtResource( 7 )]
 
 position = Vector2( 800, 240 )
+frame = 1
 
 [node name="Coin2" parent="." index="4" instance=ExtResource( 7 )]
 
 position = Vector2( 1320, 310 )
-frame = 3
 
 [node name="AudioStreams" type="Node2D" parent="." index="5"]
 
@@ -125,6 +126,12 @@ position = Vector2( 2230, 420 )
 
 position = Vector2( 1300, -340 )
 
+[node name="Portal" parent="." index="8" instance=ExtResource( 16 )]
+
+position = Vector2( 3450, 410 )
+
 [connection signal="body_entered" from="Spikes/SpikesBottom" to="Spikes/SpikesBottom" method="_on_SpikesTop_body_entered"]
+
+[connection signal="body_entered" from="Portal" to="." method="_on_Portal_body_entered"]
 
 
